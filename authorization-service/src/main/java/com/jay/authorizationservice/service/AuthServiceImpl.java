@@ -2,6 +2,7 @@ package com.jay.authorizationservice.service;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.jay.authorizationservice.entity.UserEntity;
+import com.jay.authorizationservice.entity.PasswordResetRequest;
 import com.jay.authorizationservice.repository.AuthRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -33,5 +35,16 @@ public class AuthServiceImpl implements AuthService {
 		
 		return new User(user.getUsername(), user.getPassword(), List.of(new SimpleGrantedAuthority("user")));
 	}
+	@Override
+	public boolean verifyUser(String username,String email) {
+		Optional<UserEntity> userDetails = authRepository.findById(username);
+		return (userDetails.isPresent() && userDetails.get().getEmail().equalsIgnoreCase(email));
+	}
+//	@Override
+//	public String forgotPassword(PasswordResetRequest passwordResetRequest) {
+//		if ( verifyUser(passwordResetRequest.getUsername(), passwordResetRequest.getEmail()))
+//			authRepository.
+//		return null;
+//	}
 
 }
