@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.DefaultSecurityFilterChain;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.jay.authorizationservice.jwt.JwtRequestFilter;
@@ -26,11 +26,12 @@ public class SecurityConfig {
 	private JwtRequestFilter jwtRequestFilter;
 
 	@Bean
-	public DefaultSecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.cors().and().csrf().disable().authorizeRequests().anyRequest().permitAll().anyRequest().authenticated()
-				.and().exceptionHandling().and().sessionManagement()
+	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		http.cors().and().csrf().disable().authorizeRequests().requestMatchers("/**").permitAll().anyRequest()
+				.authenticated().and().exceptionHandling().and().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-		http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+		http.headers().frameOptions().disable();
+		http.addFilterBefore( jwtRequestFilter,UsernamePasswordAuthenticationFilter.class);
 		return http.build();
 	}
 	

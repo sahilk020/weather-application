@@ -5,16 +5,20 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import javax.crypto.SecretKey;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 
 @Service
 public class JwtUtil {
-	private static final String SECRET_KEY = "${jwt.secret}";
+//	@Value("${jwtsecret}")
+	private static final SecretKey SECRET_KEY=Keys.secretKeyFor(SignatureAlgorithm.HS256);
 	private long expirationTime = 1000 * 60 * 60l;
 
 	public String extractUsername(String token) {

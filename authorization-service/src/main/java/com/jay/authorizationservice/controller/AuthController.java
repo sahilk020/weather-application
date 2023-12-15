@@ -7,12 +7,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jay.authorizationservice.entity.LoginDetails;
 import com.jay.authorizationservice.entity.SuccessResponse;
-import com.jay.authorizationservice.entity.PasswordResetRequest;
 import com.jay.authorizationservice.exception.LoginException;
 import com.jay.authorizationservice.jwt.JwtUtil;
 import com.jay.authorizationservice.service.AuthService;
