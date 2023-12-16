@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class Coordinates {
-	private String latitude;
-	private String longitude;
+public class Coord {
+	private double lat;
+	private double lon;
 }

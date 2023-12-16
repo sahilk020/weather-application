@@ -11,13 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 // TODO need to change this model class. some issue are there
 public class WeatherResponse {
-	private double lat;
-    private double lon;
-    private String timezone;
-    private int timezone_offset;
-    private CurrentWeather current;
-//    private List<MinutelyForecast> minutely;
-//    private List<HourlyForecast> hourly;
-    private List<DailyForecast> daily;
-    private List<Alert> alerts;
+	private String cod;
+    private int message;
+    private int cnt;
+    private List<WeatherData> list;
+    private City city;
 }

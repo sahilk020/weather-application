@@ -14,6 +14,6 @@ public interface WeatherFeign {
 	@GetMapping("/geo/1.0/direct")
 	List<Location> searchCity(@RequestParam("q")String city,@RequestParam("limit") int limit,@RequestParam("appid")String appid);
 	
-	@GetMapping("/data/2.5/forecast")
-	WeatherResponse getWeather(@RequestParam("lat")String lat,@RequestParam("lon")String lon,@RequestParam("appid") String appid);
+	@GetMapping("/data/2.5/forecast?cnt=2")
+	WeatherResponse getWeather(@RequestParam("lat")double lat,@RequestParam("lon")double lon,@RequestParam("appid") String appid);
 }

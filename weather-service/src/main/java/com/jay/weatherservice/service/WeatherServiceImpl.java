@@ -8,7 +8,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.jay.weatherservice.feign.WeatherFeign;
-import com.jay.weatherservice.model.Coordinates;
+import com.jay.weatherservice.model.Coord;
 import com.jay.weatherservice.model.Location;
 import com.jay.weatherservice.model.WeatherResponse;
 
@@ -37,8 +37,8 @@ public class WeatherServiceImpl implements WeatherService {
 	}
 
 	@Override
-	public WeatherResponse getWeather(Coordinates coordinates) {
-		return weatherFeign.getWeather(coordinates.getLatitude(), coordinates.getLongitude(), APP_ID);
+	public WeatherResponse getWeather(Coord coord) {
+		return weatherFeign.getWeather(coord.getLat(), coord.getLon(), APP_ID);
 	}
 
 }
