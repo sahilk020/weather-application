@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jay.wishlistservice.entity.City;
-import com.jay.wishlistservice.entity.Coordinate;
+import com.jay.wishlistservice.entity.CityId;
 import com.jay.wishlistservice.exception.CityAlreadyExistException;
 import com.jay.wishlistservice.exception.CityNotFoundException;
 import com.jay.wishlistservice.repository.WishlistRepository;
@@ -26,7 +26,7 @@ public class WishlistServiceImpl implements WishlistService {
 
 	@Override
 	public City save(City city) throws CityAlreadyExistException {
-		Optional<City> result = wishlistRepository.findById(new Coordinate(city.getLat(), city.getLon()));
+		Optional<City> result = wishlistRepository.findById(new CityId(city.getLat(), city.getLon(),city.getUsername()));
 		if (result.isEmpty())
 			return wishlistRepository.save(city);
 		throw new CityAlreadyExistException("Can't add to wishlist. It's already present");
@@ -34,7 +34,7 @@ public class WishlistServiceImpl implements WishlistService {
 
 	@Override
 	public City delete(City city) throws CityNotFoundException {
-		Optional<City> result = wishlistRepository.findById(new Coordinate(city.getLat(), city.getLon()));
+		Optional<City> result = wishlistRepository.findById(new CityId(city.getLat(), city.getLon(),city.getUsername()));
 		if (result.isEmpty())
 			throw new CityNotFoundException("Can't add to wishlist. It's already present");
 		else

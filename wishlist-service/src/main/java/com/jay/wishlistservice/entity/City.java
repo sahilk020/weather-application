@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Entity
 @Table(name = "cities")
-@IdClass(Coordinate.class)
+@IdClass(CityId.class)
 @Data
 public class City {
 	private String city;
@@ -17,5 +17,6 @@ public class City {
 	private double lat;
 	@Id
 	private double lon;
-
+	@Id
+	private String username;
 }
