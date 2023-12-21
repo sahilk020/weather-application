@@ -14,16 +14,16 @@ import com.jay.authservice.entity.LoginDetails;
 import com.jay.authservice.entity.SuccessResponse;
 import com.jay.authservice.exception.LoginException;
 import com.jay.authservice.jwt.JWTGenerator;
-import com.jay.authservice.service.AuthService;
+import com.jay.authservice.service.AuthServiceImpl;
 
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
-	private AuthService authService;
+	private AuthServiceImpl authService;
 	private JWTGenerator jwtGenerator;
 	private AuthenticationManager authenticationManager;
 
-	public AuthController(AuthenticationManager authenticationManager, JWTGenerator jwtGenerator, AuthService authService) {
+	public AuthController(AuthenticationManager authenticationManager, JWTGenerator jwtGenerator, AuthServiceImpl authService) {
 		this.authService = authService;
 		this.authenticationManager = authenticationManager;
 		this.jwtGenerator = jwtGenerator;
@@ -42,9 +42,4 @@ public class AuthController {
 		String token = jwtGenerator.generateToken(userDetails.getUsername());
 		return ResponseEntity.ok(new SuccessResponse(userDetails.getUsername(),token));
 	}
-	
-//	@GetMapping("/forgotPassword")
-//	public ResponseEntity<String> forgotPassword(@RequestBody PasswordResetRequest){
-//		return ResponseEntity.ok(authService.forgotPassword(newPassword));
-//	}
 }
