@@ -7,7 +7,7 @@ import com.jay.wishlistservice.exception.CityAlreadyExistException;
 import com.jay.wishlistservice.exception.CityNotFoundException;
 
 public interface WishlistService {
-	List<City> getAllItems();
+	List<City> getAllItems(String username);
 	City save(City city) throws CityAlreadyExistException;
 	City delete(City city) throws CityNotFoundException;
 }

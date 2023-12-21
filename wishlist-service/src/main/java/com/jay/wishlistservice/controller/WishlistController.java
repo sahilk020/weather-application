@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,9 +35,9 @@ public class WishlistController {
 		return ResponseEntity.ok(wishlistService.delete(city));
 	}
 	
-	@GetMapping
-	ResponseEntity<List<City>> getAllItems(){
-		return ResponseEntity.ok(wishlistService.getAllItems());
+	@GetMapping("/get")
+	ResponseEntity<List<City>> getAllItems(@RequestHeader("username") String username){
+		return ResponseEntity.ok(wishlistService.getAllItems(username));
 	}
 	
 }
