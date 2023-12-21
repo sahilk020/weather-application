@@ -12,13 +12,13 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import com.jay.authservice.service.AuthService;
+import com.jay.authservice.service.AuthServiceImpl;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 	@Autowired
-	private AuthService authService;
+	private AuthServiceImpl authService;
 
 //	@Autowired
 //	private JWTGenerator jwtRequestFilter;
