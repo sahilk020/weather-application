@@ -22,7 +22,7 @@ public class WeatherApiGatewayApplication {
 		return builder.routes()
 				.route(route-> route.path("/api/wishlist/**").filters(f->f.filter(apiFilter)).uri("lb://wishlist-service"))
 				.route(route->route.path("/api/weather/**").filters(f->f.filter(apiFilter)).uri("lb://weather-service"))
-				.route(route->route.path("/api/users/**").filters(f->f.filter(apiFilter)).uri("lb://user-service"))
+				.route(route->route.path("/api/users/**").uri("lb://user-service"))
 				.route(route->route.path("/api/auth/**").uri("lb://authorization-service"))
 				.build();
 	}
