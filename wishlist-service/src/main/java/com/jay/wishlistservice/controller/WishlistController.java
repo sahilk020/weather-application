@@ -25,18 +25,18 @@ public class WishlistController {
 	private WishlistService wishlistService;
 
 	@PostMapping("/save")
-	ResponseEntity<CityDTO> save(@RequestBody CityDTO city) throws CityAlreadyExistException {
+	public ResponseEntity<CityDTO> save(@RequestBody CityDTO city) throws CityAlreadyExistException {
 		return ResponseEntity.ok(wishlistService.save(city));
 
 	}
 
 	@DeleteMapping("/delete")
-	ResponseEntity<CityDTO> delete(@RequestBody CityDTO city) throws CityNotFoundException {
+	public ResponseEntity<CityDTO> delete(@RequestBody CityDTO city) throws CityNotFoundException {
 		return ResponseEntity.ok(wishlistService.delete(city));
 	}
 	
 	@GetMapping("/get")
-	ResponseEntity<List<CityDTO>> getAllItems(@RequestHeader("username") String username){
+	public ResponseEntity<List<CityDTO>> getAllItems(@RequestHeader("username") String username){
 		return ResponseEntity.ok(wishlistService.getAllItems(username));
 	}
 	
