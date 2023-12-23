@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jay.wishlistservice.entity.City;
+import com.jay.wishlistservice.entity.CityDTO;
 import com.jay.wishlistservice.exception.CityAlreadyExistException;
 import com.jay.wishlistservice.exception.CityNotFoundException;
 import com.jay.wishlistservice.service.WishlistService;
@@ -25,18 +25,18 @@ public class WishlistController {
 	private WishlistService wishlistService;
 
 	@PostMapping("/save")
-	ResponseEntity<City> save(@RequestBody City city) throws CityAlreadyExistException {
+	ResponseEntity<CityDTO> save(@RequestBody CityDTO city) throws CityAlreadyExistException {
 		return ResponseEntity.ok(wishlistService.save(city));
 
 	}
 
 	@DeleteMapping("/delete")
-	ResponseEntity<City> delete(@RequestBody City city) throws CityNotFoundException {
+	ResponseEntity<CityDTO> delete(@RequestBody CityDTO city) throws CityNotFoundException {
 		return ResponseEntity.ok(wishlistService.delete(city));
 	}
 	
 	@GetMapping("/get")
-	ResponseEntity<List<City>> getAllItems(@RequestHeader("username") String username){
+	ResponseEntity<List<CityDTO>> getAllItems(@RequestHeader("username") String username){
 		return ResponseEntity.ok(wishlistService.getAllItems(username));
 	}
 	

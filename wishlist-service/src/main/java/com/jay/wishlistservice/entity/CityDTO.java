@@ -1,28 +1,30 @@
 package com.jay.wishlistservice.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
-import jakarta.persistence.Table;
+import java.io.Serializable;
+
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "cities")
-@IdClass(CityId.class)
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class City {
+@Builder
+public class CityDTO implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6780158649217665570L;
+	@NotBlank
 	private String city;
+	@NotBlank
 	private String country;
-	@Id
+	@NotBlank
 	private double lat;
-	@Id
+	@NotBlank
 	private double lon;
-	@Id
+	@NotBlank
 	private String username;
 }
