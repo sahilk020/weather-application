@@ -1,5 +1,7 @@
 package com.jay.userservice.controller;
 
+import com.jay.userservice.entity.UserDto;
+import com.jay.userservice.exception.UserAlreadyRegisteredException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -23,7 +25,7 @@ public class RegistrationController {
 	private RegisterService registerService;
 
 	@PostMapping("/register")
-	public ResponseEntity<User> register(@RequestBody @Valid User user){
+	public ResponseEntity<User> register(@RequestBody @Valid UserDto user) throws UserAlreadyRegisteredException {
 		log.info("Inside method register()");
 		return ResponseEntity.ok(registerService.register(user));
 	}
