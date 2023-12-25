@@ -27,16 +27,4 @@ public class AuthServiceImpl implements UserDetailsService {
 		UserCredentials user = authRepository.findById(username).get();		
 		return new User(user.getUsername(), user.getPassword(), new ArrayList<>());
 	}
-//	@Override
-//	public boolean verifyUser(String username,String email) {
-//		Optional<UserCredentials> userDetails = authRepository.findById(username);
-//		return (userDetails.isPresent() && userDetails.get().getEmail().equalsIgnoreCase(email));
-//	}
-//	@Override
-//	public String forgotPassword(PasswordResetRequest passwordResetRequest) {
-//		if ( verifyUser(passwordResetRequest.getUsername(), passwordResetRequest.getEmail()))
-//			authRepository.
-//		return null;
-//	}
-
 }

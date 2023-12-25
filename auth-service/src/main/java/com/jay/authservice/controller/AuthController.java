@@ -31,14 +31,13 @@ public class AuthController {
 
 	@GetMapping("/login")
 	public ResponseEntity<SuccessResponse> login(@RequestBody LoginDetails loginDetails) throws LoginException {
-		UserDetails userDetails;
 		try {
 			authenticationManager.authenticate(
 					new UsernamePasswordAuthenticationToken(loginDetails.getUsername(), loginDetails.getPassword()));
 		} catch (UsernameNotFoundException exception) {
 			throw new LoginException("Enter correct username or password");
 		}
-		userDetails = authService.loadUserByUsername(loginDetails.getUsername());
+		UserDetails userDetails = authService.loadUserByUsername(loginDetails.getUsername());
 		String token = jwtGenerator.generateToken(userDetails.getUsername());
 		return ResponseEntity.ok(new SuccessResponse(userDetails.getUsername(),token));
 	}
