@@ -20,7 +20,7 @@ import com.jay.weatherservice.service.WeatherService;
 public class WeatherController {
 
 	@Autowired
-	WeatherService weatherService;
+	private WeatherService weatherService;
 
 	@GetMapping("/search/{city}")
 	public ResponseEntity<List<Location>> search(@PathVariable String city) {

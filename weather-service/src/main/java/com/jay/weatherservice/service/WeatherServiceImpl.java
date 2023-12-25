@@ -23,15 +23,12 @@ public class WeatherServiceImpl implements WeatherService {
 	@Autowired
 	private WeatherFeign weatherFeign;
 	private static final int limit = 5;
-	private static final String LOCATION_URL = "http://api.openweathermap.org/geo/1.0/direct?q={city}&limit=5&appid={API key}";
 
 	@Override
 	@Cacheable(key = "#city")
 	public List<Location> search(String city) {
 		log.info("inside method search() ");
 		List<Location> searchCity = weatherFeign.searchCity(city,limit, APP_ID);
-//		RestTemplate restTemplate = new RestTemplate();
-//		ResponseEntity<List> forObject = restTemplate.getForEntity(LOCATION_URL ,List.class, city, APP_ID);
 		log.debug("Found city "+ searchCity.toString());
 		return searchCity;
 	}
