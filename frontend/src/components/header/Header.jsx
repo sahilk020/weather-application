@@ -12,12 +12,14 @@ import {
 import AdbIcon from "@mui/icons-material/Adb";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { actions } from "../../store/login-slice";
 function Header() {
   const authenticatedPages = [{ name: "", path: "" }];
-
   const guestPages = [{ name: "Register", path: "/register" }];
-  const [isLoggedIn, setLoggedIn] = useState(false);
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const handleOpenNavMenu = (event) => {
@@ -41,6 +43,10 @@ function Header() {
       </MenuItem>
     ));
   };
+
+  useEffect(() => {
+    console.log(isLoggedIn ? "User is already loggedIn" : "No user logged in");
+  }, [isLoggedIn]);
   return (
     <AppBar position="static" style={{ backgroundColor: "#732d65" }}>
       <Container maxWidth="xl">
@@ -113,7 +119,7 @@ function Header() {
               textDecoration: "none",
             }}
           >
-            Shopping Store
+            Weather App
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {headerMenuItems()}
@@ -124,7 +130,7 @@ function Header() {
               <Button
                 sx={{ color: "white" }}
                 onClick={() => {
-                  // dispatch(actions.logout());
+                  dispatch(actions.logout());
                   navigate("/");
                 }}
               >
