@@ -4,8 +4,10 @@ import {
   Button,
   Container,
   IconButton,
+  InputAdornment,
   Menu,
   MenuItem,
+  TextField,
   Toolbar,
   Typography,
 } from "@mui/material";
@@ -15,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { actions } from "../../store/login-slice";
+import SearchIcon from '@mui/icons-material/Search';
 function Header() {
   const authenticatedPages = [{ name: "", path: "" }];
   const guestPages = [{ name: "Register", path: "/register" }];
@@ -124,7 +127,24 @@ function Header() {
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {headerMenuItems()}
           </Box>
-
+          <Box>
+            <TextField
+              id="search"
+              label="Search"
+              variant="standard"
+              size="small"
+              InputProps={{
+                startAdornment: <InputAdornment position="end">
+                  <SearchIcon/>
+                </InputAdornment>
+              }}
+              sx={{
+                backgroundColor: "#ffffff",
+                borderRadius: 2,
+                m:1
+              }}
+            />
+          </Box>
           <Box sx={{ flexGrow: 0 }}>
             {isLoggedIn ? (
               <Button

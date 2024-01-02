@@ -43,7 +43,6 @@ function Login() {
   });
   console.table(values);
   //TODO need to add page forwarding
-  // useEffect(()=> isLoggedIn && navigate('/'),[isLoggedIn,navigate])
   useEffect(() => {
     isLoggedIn && navigate("/");
   }, [isLoggedIn, navigate]);

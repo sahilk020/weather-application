@@ -1,0 +1,13 @@
+.container{
+    background-color: black;
+    color: rgb(107, 105, 105);
+    padding: 1rem;
+}
+
+.links {
+    list-style-type: none;
+}
+
+.links li{
+    padding: 0.25rem;
+}
