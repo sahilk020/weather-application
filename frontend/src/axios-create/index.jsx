@@ -1,6 +1,6 @@
 import axios from "axios";
 
-let weatherOpenRequest = axios.create({
-    baseURL: 'http://localhost:8765',
+let weather = axios.create({
+    baseURL: 'http://localhost:8765/api',
 });
-export default weatherOpenRequest;
+export default weather;

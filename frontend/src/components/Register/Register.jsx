@@ -8,17 +8,15 @@ import Grid from "@mui/material/Grid";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import axios from "axios";
 import { useFormik } from "formik";
 import { NavLink, useNavigate } from "react-router-dom";
-import { registerSchema } from '../schema';
+import { registerSchema } from "../schema";
+import weather from "../../axios-create";
 
 const defaultTheme = createTheme();
 
 export default function Register() {
   const navigate = useNavigate();
-  const registerUrl = ''
-
   let userDetails = {
     firstName: "",
     lastName: "",
@@ -34,14 +32,11 @@ export default function Register() {
     validationSchema: registerSchema,
     onSubmit: async (value) => {
       console.table(value);
-      let successResponse = await axios({
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        url: registerUrl,
-        data: value,
-      });
+      let successResponse = await weather.post(
+        "/users/register",
+        value,
+        { headers: { "Content-Type": "application/json" } }
+      );
       alert(JSON.stringify(successResponse.data));
       navigate("/");
       //TODO need to add page forwarding here
@@ -50,7 +45,7 @@ export default function Register() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs" sx={{mb:10}}>
         <CssBaseline />
         <Box
           sx={{

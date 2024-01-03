@@ -8,16 +8,13 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import axios from "axios";
 import { useFormik } from "formik";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loginSchema } from "../schema";
 import styles from "./Login.module.css";
 import { useEffect } from "react";
-//to perform login operation
 function Login() {
-  const loginUrl = "";
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   // const dispatch = useDispatch()
   const navigate = useNavigate();
@@ -26,23 +23,11 @@ function Login() {
     initialValues: loginDetails,
     validationSchema: loginSchema,
     onSubmit: (value) => {
-      console.log(value);
-      axios
-        .post(loginUrl, value, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        .then((res) => {
-          localStorage.setItem("authResponse", JSON.stringify(res.data));
-          console.log(res.data);
-        })
-        .catch((error) => alert(error));
-      //TODO need to add page forwarding here
+      console.log("value submitted" );
+      //TODO here i need to make api request in backend and save them in redux and localhost
     },
   });
   console.table(values);
-  //TODO need to add page forwarding
   useEffect(() => {
     isLoggedIn && navigate("/");
   }, [isLoggedIn, navigate]);

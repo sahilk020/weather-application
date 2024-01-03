@@ -1,23 +1,20 @@
+import AdbIcon from "@mui/icons-material/Adb";
+import MenuIcon from "@mui/icons-material/Menu";
 import {
   AppBar,
   Box,
   Button,
   Container,
   IconButton,
-  InputAdornment,
   Menu,
   MenuItem,
-  TextField,
   Toolbar,
-  Typography,
+  Typography
 } from "@mui/material";
-import AdbIcon from "@mui/icons-material/Adb";
-import MenuIcon from "@mui/icons-material/Menu";
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { actions } from "../../store/login-slice";
-import SearchIcon from '@mui/icons-material/Search';
 function Header() {
   const authenticatedPages = [{ name: "", path: "" }];
   const guestPages = [{ name: "Register", path: "/register" }];
@@ -126,24 +123,6 @@ function Header() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {headerMenuItems()}
-          </Box>
-          <Box>
-            <TextField
-              id="search"
-              label="Search"
-              variant="standard"
-              size="small"
-              InputProps={{
-                startAdornment: <InputAdornment position="end">
-                  <SearchIcon/>
-                </InputAdornment>
-              }}
-              sx={{
-                backgroundColor: "#ffffff",
-                borderRadius: 2,
-                m:1
-              }}
-            />
           </Box>
           <Box sx={{ flexGrow: 0 }}>
             {isLoggedIn ? (
