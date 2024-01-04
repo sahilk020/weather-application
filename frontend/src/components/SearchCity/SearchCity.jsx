@@ -1,3 +1,4 @@
+import SearchIcon from "@mui/icons-material/Search";
 import {
   Box,
   Button,
@@ -5,17 +6,35 @@ import {
   Grid,
   InputAdornment,
   TextField,
-  Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import SearchIcon from "@mui/icons-material/Search";
+import React, { useState } from "react";
+import { City } from "./City";
 export default function SearchCity() {
-    const [city,setCity] = useState('');
-  let handleSubmit = () => {
-    console.log(city)
+  const [city, setCity] = useState("");
+  const [result, setResult] = useState([]);
+  let handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(city);
+    let dummyData = [
+      {
+        name: "new delhi",
+        lat: 77.232,
+        lon: 34.565,
+        country: "IN",
+        state: "Delhi",
+      },
+      {
+        name: "new delhi",
+        lat: 84.232,
+        lon: 89.565,
+        country: "CN",
+        state: "xinjiang",
+      },
+    ];
+    setResult(dummyData);
   };
   return (
-    <Container component="div">
+    <Container component="main">
       <Box
         component="form"
         sx={{
@@ -27,11 +46,11 @@ export default function SearchCity() {
         }}
         onSubmit={handleSubmit}
       >
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{p:5}}>
           <TextField
             id="search"
             label="Search"
-            variant="standard"
+            variant="outlined"
             size="small"
             InputProps={{
               startAdornment: (
@@ -46,9 +65,10 @@ export default function SearchCity() {
               m: 1,
             }}
             value={city}
-            onChange={(e)=>setCity(e.target.value)}
+            onChange={(e) => setCity(e.target.value)}
           />
-          <Button type="submit"
+          <Button
+            type="submit"
             sx={{
               backgroundColor: "rgb(200, 200, 200);",
               borderRadius: 1,
@@ -60,8 +80,12 @@ export default function SearchCity() {
             <SearchIcon />
           </Button>
         </Grid>
+        <Grid item xs={12}>
+          {result.map((loc) => (
+            <City key={loc.lat + loc.lon} city={loc} />
+          ))}
+        </Grid>
       </Box>
-      <Typography variant="h4"></Typography>
     </Container>
   );
 }
