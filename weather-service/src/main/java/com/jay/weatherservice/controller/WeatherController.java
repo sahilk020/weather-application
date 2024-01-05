@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,7 +27,7 @@ public class WeatherController {
 	public ResponseEntity<List<Location>> search(@PathVariable String city) {
 		return ResponseEntity.ok(weatherService.search(city));
 	}
-	@GetMapping("/current")
+	@PostMapping("/current")
 	public ResponseEntity<WeatherResponse> getWeather(@RequestBody Coord coordinates){
 		return ResponseEntity.ok(weatherService.getWeather(coordinates));
 	}
