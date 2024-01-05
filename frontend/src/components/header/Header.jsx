@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { actions } from "../../store/login-slice";
 function Header() {
-  const authenticatedPages = [{ name: "", path: "" }];
+  const authenticatedPages = [{ name: "Search", path: "/searchCity" },{name:'Wishlist',path:'/wishlist'}];
   const guestPages = [{ name: "Register", path: "/register" }];
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const dispatch = useDispatch();
@@ -65,6 +65,7 @@ function Header() {
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
+              cursor:'pointer'
             }}
           >
             WeatherApp
@@ -117,6 +118,7 @@ function Header() {
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
+              cursor:'pointer'
             }}
           >
             Weather App
