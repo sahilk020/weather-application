@@ -9,29 +9,16 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { City } from "./City";
+import weather from "../../axios-create";
+import { useSelector } from "react-redux";
 export default function SearchCity() {
   const [city, setCity] = useState("");
   const [result, setResult] = useState([]);
+  const token = useSelector(state=>state.token)
   let handleSubmit = (e) => {
     e.preventDefault();
     console.log(city);
-    let dummyData = [
-      {
-        name: "new delhi",
-        lat: 77.232,
-        lon: 34.565,
-        country: "IN",
-        state: "Delhi",
-      },
-      {
-        name: "new delhi",
-        lat: 84.232,
-        lon: 89.565,
-        country: "CN",
-        state: "xinjiang",
-      },
-    ];
-    setResult(dummyData);
+    weather.get(`/weather/search/${city}`,{headers:{'Authorization':token}}).then(res=>setResult(res.data)).catch(err=>console.error(err));
   };
   return (
     <Container component="main">
