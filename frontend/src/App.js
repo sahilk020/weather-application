@@ -1,11 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-// import "./App.css";
 import Header from "./components/header/Header";
 import Home from "./components/Home/Home";
 import { Suspense, lazy } from "react";
 import Footer from "./components/Footer/Footer";
 import Loading from "./components/Loading/Loading";
 import SearchCity from "./components/SearchCity/SearchCity";
+import Weather from "./components/Weather/Weather";
 
 const Login = lazy(() => import("./components/Login/Login"));
 const Register = lazy(() => import("./components/Register/Register"));
@@ -21,6 +21,7 @@ function App() {
           <Route path="/wishlist" element={<Wishlist/>}/>
           <Route path="/searchCity" element={<SearchCity/>}/>
           <Route path="/" element={<Home />} />
+          <Route path="/weather" Component={Weather}/>
         </Routes>
       </Suspense>
       <Footer />
