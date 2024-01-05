@@ -1,30 +1,38 @@
-import { LockOutlined } from "@mui/icons-material";
 import {
-  Avatar,
-  Box,
-  Button,
-  Grid,
-  Paper,
   TextField,
+  Button,
+  Box,
+  Grid,
+  Avatar,
   Typography,
+  Paper,
 } from "@mui/material";
-import { useFormik } from "formik";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { loginSchema } from "../schema";
-import styles from "./Login.module.css";
 import { useEffect } from "react";
+import styles from "./Login.module.css";
+import { LockOutlined } from "@mui/icons-material";
+import { useFormik } from "formik";
+import { loginSchema } from "../schema";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { actions } from "../../store/login-slice";
+import weather from "../../axios-create";
+//to perform login operation
 function Login() {
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   let loginDetails = { username: "", password: "" };
   const { values, errors, handleChange, handleSubmit } = useFormik({
     initialValues: loginDetails,
     validationSchema: loginSchema,
     onSubmit: (value) => {
-      console.log("value submitted" );
-      //TODO here i need to make api request in backend and save them in redux and localhost
+      console.log("inside", value);
+      weather.post("/auth/login", value).then((res) => {
+        console.log(res.data);
+        localStorage.setItem('token',res.data.token)
+        localStorage.setItem('username',res.data.username)
+        dispatch(actions.login(res.data))
+      });
     },
   });
   console.table(values);

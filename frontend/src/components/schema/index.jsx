@@ -10,6 +10,6 @@ export const registerSchema = Yup.object({
     contactNumber: Yup.string().length(10).required('Please enter your contact number')
 });
 export const loginSchema = Yup.object({
-    loginId:Yup.string().required('Please enter your login ID'),
+    username:Yup.string().required('Please enter your username'),
     password:Yup.string().required('Please enter your password')
 });
