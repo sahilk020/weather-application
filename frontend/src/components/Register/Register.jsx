@@ -39,7 +39,6 @@ export default function Register() {
       );
       alert(JSON.stringify(successResponse.data));
       navigate("/");
-      //TODO need to add page forwarding here
     },
   });
 
@@ -115,14 +114,14 @@ export default function Register() {
                 <TextField
                   required
                   fullWidth
-                  value={values.loginId}
+                  value={values.username}
                   id="username"
                   label="Username"
                   name="username"
                   autoComplete="username"
                   onChange={handleChange}
-                  error={Boolean(errors.loginId) && touched.loginId}
-                  helperText={errors.loginId}
+                  error={Boolean(errors.username) && touched.username}
+                  helperText={errors.username}
                 />
               </Grid>
               <Grid item xs={12}>
