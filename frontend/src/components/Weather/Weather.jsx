@@ -33,12 +33,14 @@ export default function Weather() {
       .catch((err) => console.log(err));
   }, [state, token]);
   return (
-    <Container component="div">
+    <Container component="div" sx={{my:2}}>
       <Grid item xs={12}>
         <Typography component='h1' variant='h4'>{`${weatherInfo.city.name}, ${weatherInfo.city.country}`}</Typography>
-        <Typography component='body' variant='body1'><b>Sunrise : </b>{numToDate(weatherInfo.city.sunrise)}</Typography>
+        <Typography component='body' variant='body1' sx={{my:1}}><b>Sunrise : </b>{numToDate(weatherInfo.city.sunrise)}</Typography>
         <Typography component='body' variant='body1'><b>Sunset : </b>{numToDate(weatherInfo.city.sunset)}</Typography>
+        <Container component='div' sx={{mt:5,mb:5,px:0}}>
         {weatherInfo.list.map((value,index)=><WeatherMain key={index} mainInfo={value}/>)}
+        </Container>
       </Grid>
     </Container>
   );
