@@ -12,10 +12,13 @@ import { useFormik } from "formik";
 import { NavLink, useNavigate } from "react-router-dom";
 import { registerSchema } from "../schema";
 import weather from "../../axios-create";
+import { useState } from "react";
+import { Snackbar } from "@mui/material";
 
 const defaultTheme = createTheme();
 
 export default function Register() {
+  const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   let userDetails = {
     firstName: "",
@@ -32,19 +35,20 @@ export default function Register() {
     validationSchema: registerSchema,
     onSubmit: async (value) => {
       console.table(value);
-      let successResponse = await weather.post(
-        "/users/register",
-        value,
-        { headers: { "Content-Type": "application/json" } }
-      );
-      alert(JSON.stringify(successResponse.data));
-      navigate("/");
+      let successResponse = await weather.post("/users/register", value, {
+        headers: { "Content-Type": "application/json" },
+      });
+      setOpen(Boolean(successResponse.data));
+      // alert(JSON.stringify(successResponse.data));
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
     },
   });
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs" sx={{mb:10}}>
+      <Container component="main" maxWidth="xs" sx={{ mb: 10 }}>
         <CssBaseline />
         <Box
           sx={{
@@ -187,6 +191,12 @@ export default function Register() {
             </Grid>
           </Box>
         </Box>
+        <Snackbar
+          open={open}
+          autoHideDuration={2000}
+          onClose={() => setOpen(false)}
+          message="Registration Successful"
+        />
       </Container>
     </ThemeProvider>
   );
