@@ -36,7 +36,8 @@ public class WishlistServiceImpl implements WishlistService {
 	}
 
 	@Override
-	@CachePut(cacheNames = "cityCache", key = "#cityDTO.username")
+//	@CachePut(cacheNames = "cityCache", key = "#cityDTO.username")
+	@CacheEvict(cacheNames = "cityList", allEntries = true)
 	public CityDTO save(CityDTO cityDTO) throws CityAlreadyExistException {
 		Optional<City> result = wishlistRepository
 				.findById(new CityId(cityDTO.getLat(), cityDTO.getLon(), cityDTO.getUsername()));
@@ -54,7 +55,7 @@ public class WishlistServiceImpl implements WishlistService {
 	}
 
 	@Override
-	@CacheEvict(cacheNames = "cityCache", allEntries = true)
+	@CacheEvict(cacheNames = "cityList", allEntries = true)
 	public CityDTO delete(CityDTO cityDTO) throws CityNotFoundException {
 		Optional<City> result = wishlistRepository
 				.findById(new CityId(cityDTO.getLat(), cityDTO.getLon(), cityDTO.getUsername()));
