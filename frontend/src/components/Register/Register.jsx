@@ -39,7 +39,6 @@ export default function Register() {
         headers: { "Content-Type": "application/json" },
       });
       setOpen(Boolean(successResponse.data));
-      // alert(JSON.stringify(successResponse.data));
       setTimeout(() => {
         navigate("/");
       }, 2000);
