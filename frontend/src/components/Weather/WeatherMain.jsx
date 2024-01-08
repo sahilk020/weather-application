@@ -1,6 +1,6 @@
 import { Container, CssBaseline, Typography } from '@mui/material'
 import React from 'react'
-
+import PropTypes from "prop-types";
 export const WeatherMain = ({mainInfo}) => {
   const imageUrl = `https://openweathermap.org/img/wn/${mainInfo.weather[0].icon}.png`
   return (
@@ -25,3 +25,6 @@ export const WeatherMain = ({mainInfo}) => {
     </Container>
   )
 }
+WeatherMain.propTypes={
+  mainInfo:PropTypes.object,
+};
