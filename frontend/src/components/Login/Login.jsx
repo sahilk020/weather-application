@@ -35,7 +35,7 @@ function Login() {
       });
     },
   });
-  console.table(values);
+  // console.table(values);
   useEffect(() => {
     isLoggedIn && navigate("/");
   }, [isLoggedIn, navigate]);
