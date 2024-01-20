@@ -27,12 +27,18 @@ function Login() {
     validationSchema: loginSchema,
     onSubmit: (value) => {
       console.log("inside", value);
-      weather.post("/auth/login", value).then((res) => {
-        console.log(res.data);
-        localStorage.setItem('token',res.data.token)
-        localStorage.setItem('username',res.data.username)
-        dispatch(actions.login(res.data))
-      });
+      weather
+        .post("/auth/login", value)
+        .then((res) => {
+          console.log(res.data);
+          localStorage.setItem("token", res.data.token);
+          localStorage.setItem("username", res.data.username);
+          dispatch(actions.login(res.data));
+        })
+        .catch((err) => {
+          console.error(err);
+          alert('Wrong Credentials')
+        });
     },
   });
   // console.table(values);
