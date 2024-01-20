@@ -39,7 +39,7 @@ public class AuthController {
 			log.info("performing login");
 			authenticationManager.authenticate(
 					new UsernamePasswordAuthenticationToken(loginDetails.getUsername(), loginDetails.getPassword()));
-		} catch (UsernameNotFoundException exception) {
+		} catch (Exception exception) {
 			log.info("login failed");
 			throw new LoginException("Enter correct username or password");
 		}
