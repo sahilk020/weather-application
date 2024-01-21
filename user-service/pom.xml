@@ -88,6 +88,7 @@
 		</dependencies>
 	</dependencyManagement>
 	<build>
+		<finalName>user-service</finalName>
 		<pluginManagement>
 			<plugins>
 				<plugin>

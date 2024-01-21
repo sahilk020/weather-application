@@ -93,6 +93,7 @@
 		</dependencies>
 	</dependencyManagement>
 	<build>
+		<finalName>wishlist-service</finalName>
 		<pluginManagement>
 			<plugins>
 				<plugin>

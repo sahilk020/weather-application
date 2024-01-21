@@ -61,6 +61,7 @@
 		</dependencies>
 	</dependencyManagement>
 	<build>
+		<finalName>weather-api-gateway</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

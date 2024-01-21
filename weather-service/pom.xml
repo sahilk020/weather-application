@@ -69,6 +69,7 @@
 		</dependencies>
 	</dependencyManagement>
 	<build>
+		<finalName>weather-service</finalName>
 		<pluginManagement>
 			<plugins>
 				<plugin>
