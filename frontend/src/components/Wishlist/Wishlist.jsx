@@ -41,17 +41,23 @@ export default function Wishlist() {
       .catch((err) => console.error(err));
   }, [open, token]);
   return (
-    <Container component="main" sx={{ pt: 5, pb: 5, display: "flex",justifyContent:'center'}}>
+    <Container
+      component="main"
+      sx={{ pt: 5, pb: 5, display: "flex", justifyContent: "center" }}
+    >
       {list &&
         list.map((wishlist) => (
           <Card
-            onClick={()=>nav("/weather", {
-              state: { lat: wishlist.lat, lon: wishlist.lon },
-            })}
             key={`${wishlist.lat} ${wishlist.lon} ${wishlist.username}`}
             sx={{ maxWidth: 345, mr: 2 }}
           >
-            <CardActionArea>
+            <CardActionArea
+              onClick={() =>
+                nav("/weather", {
+                  state: { lat: wishlist.lat, lon: wishlist.lon },
+                })
+              }
+            >
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
                   {`${wishlist.city},${wishlist.country}`}
