@@ -38,12 +38,12 @@ public class AuthController {
 		try {
 			log.info("performing login");
 			authenticationManager.authenticate(
-					new UsernamePasswordAuthenticationToken(loginDetails.getUsername(), loginDetails.getPassword()));
+					new UsernamePasswordAuthenticationToken(loginDetails.username(), loginDetails.password()));
 		} catch (Exception exception) {
 			log.info("login failed");
 			throw new LoginException("Enter correct username or password");
 		}
-		UserDetails userDetails = authService.loadUserByUsername(loginDetails.getUsername());
+		UserDetails userDetails = authService.loadUserByUsername(loginDetails.username());
 		String token = jwtGenerator.generateToken(userDetails.getUsername());
 		log.info("token generated {}",token);
 		return ResponseEntity.ok(new SuccessResponse(userDetails.getUsername(),token));

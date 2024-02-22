@@ -46,30 +46,30 @@ class AuthControllerTest {
 	private SuccessResponse successResponse;
 	
 	@BeforeEach
-	void setUp() throws Exception {
+	void setUp() {
 		loginDetails = new LoginDetails("username", "password");
 		successResponse = new SuccessResponse("username", "randomTokenFoundHere");
 	}
 
 	@AfterEach
-	void tearDown() throws Exception {
+	void tearDown() {
 		loginDetails =null;
 		successResponse = null;
 	}
 
 	@Test
 	void testLogin() throws LoginException {
-		UserDetails userDetails = new User(loginDetails.getUsername(), loginDetails.getPassword(),new ArrayList<>());
+		UserDetails userDetails = new User(loginDetails.username(), loginDetails.password(),new ArrayList<>());
 		when(authenticationManager.authenticate(any())).thenReturn(authentication);
-		when(authServiceImpl.loadUserByUsername(loginDetails.getUsername())).thenReturn(userDetails);
-		when(jwtGenerator.generateToken(anyString())).thenReturn(successResponse.getToken());
+		when(authServiceImpl.loadUserByUsername(loginDetails.username())).thenReturn(userDetails);
+		when(jwtGenerator.generateToken(anyString())).thenReturn(successResponse.token());
 		ResponseEntity<SuccessResponse> response = authController.login(loginDetails);
 		assertEquals(successResponse, response.getBody());
 		assertTrue(response.getStatusCode().is2xxSuccessful());
 	}
 	
 	@Test
-	void testLoginThrowsLoginException() throws LoginException {
+	void testLoginThrowsLoginException() {
 		when(authenticationManager.authenticate(any())).thenThrow(UsernameNotFoundException.class);
 		assertThrows(LoginException.class, ()->authController.login(loginDetails));
 	}
