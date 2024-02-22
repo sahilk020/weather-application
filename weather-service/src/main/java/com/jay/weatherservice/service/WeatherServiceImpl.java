@@ -2,6 +2,7 @@ package com.jay.weatherservice.service;
 
 import java.util.List;
 
+import com.jay.weatherservice.client.WeatherHttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
@@ -22,20 +23,24 @@ public class WeatherServiceImpl implements WeatherService {
 	private String APP_ID ;
 	@Autowired
 	private WeatherFeign weatherFeign;
+
+	@Autowired
+	private WeatherHttpClient weatherHttpClient;
 	private static final int limit = 5;
 
 	@Override
 	@Cacheable(key = "#city")
 	public List<Location> search(String city) {
 		log.info("inside method search() ");
-		List<Location> searchCity = weatherFeign.searchCity(city,limit, APP_ID);
+//		List<Location> searchCity = weatherFeign.searchCity(city,limit, APP_ID);
+		List<Location> searchCity = weatherHttpClient.searchCity(city,limit,APP_ID);
 		log.debug("Found city "+ searchCity.toString());
 		return searchCity;
 	}
 
 	@Override
 	public WeatherResponse getWeather(Coord coord) {
-		return weatherFeign.getWeather(coord.getLat(), coord.getLon(), APP_ID);
+		return weatherHttpClient.getWeather(coord.getLat(),coord.getLon(),APP_ID);
 	}
 
 }
