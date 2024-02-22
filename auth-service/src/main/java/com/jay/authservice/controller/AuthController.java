@@ -4,8 +4,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,9 +21,9 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/api/auth")
 @Slf4j
 public class AuthController {
-	private AuthServiceImpl authService;
-	private JWTGenerator jwtGenerator;
-	private AuthenticationManager authenticationManager;
+	private final AuthServiceImpl authService;
+	private final JWTGenerator jwtGenerator;
+	private final AuthenticationManager authenticationManager;
 
 	public AuthController(AuthenticationManager authenticationManager, JWTGenerator jwtGenerator, AuthServiceImpl authService) {
 		this.authService = authService;
